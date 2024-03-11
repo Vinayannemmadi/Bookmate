@@ -11,7 +11,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use(cors({ origin: "https://book-mate.onrender.com"}));
-
 // https://book-mate.onrender.com/
 
 app.use('/api/liked/:id', (req, res, next) => {

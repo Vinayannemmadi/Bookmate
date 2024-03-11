@@ -28,19 +28,19 @@ const SideBarContainer=()=> {
         <SideBar>
             <Elements>
               <StyledLinkContainer>
-                <StyledLink onClick={()=>handleRouting('newbooks')}><BsStars /> New</StyledLink>
+                <StyledLink onClick={()=>handleRouting('newbooks')}><BsStars/> New</StyledLink>
               </StyledLinkContainer>
               <StyledLinkContainer>
-                <StyledLink onClick={()=>handleRouting('trending')}> <BsFire /> Trending</StyledLink>
+                <StyledLink onClick={()=>handleRouting('trending')}><BsFire/> Trending</StyledLink>
               </StyledLinkContainer>
               <StyledLinkContainer>
-                <StyledLink onClick={()=>handleRouting('mostread')}> <IoMdStopwatch /> Most Read</StyledLink>
+                <StyledLink onClick={()=>handleRouting('mostread')}><IoMdStopwatch/> Most Read</StyledLink>
               </StyledLinkContainer>
               <StyledLinkContainer>
-                <StyledLink onClick={()=>handleRouting('downloads')}> <FaDownload /> Downlaods</StyledLink>
+                <StyledLink onClick={()=>handleRouting('downloads')}><FaDownload/> Downlaods</StyledLink>
               </StyledLinkContainer>
               <StyledLinkContainer>
-                <StyledLink onClick={()=>handleRouting('liked')}> <FaHeart /> Liked</StyledLink>
+                <StyledLink onClick={()=>handleRouting('liked')}><FaHeart/> Liked</StyledLink>
               </StyledLinkContainer>
             </Elements>
         </SideBar>

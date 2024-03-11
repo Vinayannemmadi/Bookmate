@@ -119,7 +119,7 @@ const  Home =()=> {
                     <p style={{textAlign:'center',marginTop:0}}>by: <q>{getAuther(book.authors)}</q></p>
                     <CostLikeContainer>
                       <button style={{border:'none',borderRadius:4,backgroundColor:'yellowgreen',
-                        color:'black',fontSize:15,height:22,width:40}}>$15</button>
+                        color:'black',fontSize:15,height:22,width:40}}>{book.price===0? `Free`:`$${book.price}`}</button>
                       <LikeButton onClick={()=>handleLike(book._id)}>
                           {getLiked(book._id)===true ?
                             <FcLike size={22} 

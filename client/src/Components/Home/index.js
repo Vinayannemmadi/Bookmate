@@ -9,12 +9,11 @@ import Cookies from 'universal-cookie';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router';
-// import { toast } from 'react-toastify';
 
 const  Home =()=> {
   const [books,setBooks]=useState([]);
   const [search,setSearch]=useState("");
-  const [fileteredBooks,setFiltered]=useState(books);
+  const [fileteredBooks,setFiltered]=useState([]);
   const [liked,setLiked]=useState([]);
   const cookies=new Cookies();
   const navigate=useNavigate();
@@ -27,12 +26,15 @@ const  Home =()=> {
           setFiltered(data);
           const cookie=new Cookies();
           const token=cookie.get('jwtToken');
-          const likeddata=await axios.post('http://localhost:5000/api/liked',{token:token});
-          console.log(likeddata.data);
-          setLiked(likeddata.data);
+          if(!token)
+            setLiked([]);
+          else{
+            const likeddata=await axios.post('http://localhost:5000/api/liked',{token:token});
+            setLiked(likeddata.data);
+          }
         }
         catch(error){
-          // console.log("error in home route ",error);
+          setFiltered([]);
         }
     }
     
@@ -49,15 +51,21 @@ const  Home =()=> {
   const handleLike=async (id)=>{
       const cookies=new Cookies();
       const token=cookies.get('jwtToken');
+      if(!token)
+      {
+        toast.error('Please Login to like this book!');
+        return ;
+      }
       try{
-        await axios.post(`http://localhost:5000/api/liked/${id}`,{token:token,user:''});
+        if(!token)
+            throw  new Error("Please Login First!");
+            await axios.post(`http://localhost:5000/api/liked/${id}`,{token:token});
       }
       catch(error){
-        toast.error(`${error.response.data} Please login to Like this book`);
+        toast.error(`Please login to Like this book`);
       }
       const book=fileteredBooks.find(book => book._id === id);
       const like=book.isLiked;
-      // console.log(book);
       setFiltered(prevBooks => {
         return prevBooks.map(book => {
             if (book._id === id) {
@@ -67,9 +75,7 @@ const  Home =()=> {
           });
         });
         const likeddata=await axios.post('http://localhost:5000/api/liked',{token:token});
-          console.log(likeddata.data);
           setLiked(likeddata.data);
-        // console.log(fileteredBooks);
   }
   const handleSearch=(event)=>{
       setSearch(event.target.value);
@@ -104,7 +110,7 @@ const  Home =()=> {
           </SearchBox>
           {search && <h1 style={{color:'black', textAlign:'center',fontSize:18}}>{fileteredBooks.length} books found</h1>}
           <BooksContainer>
-            {books &&  fileteredBooks.map((book) => (
+            {Array.isArray(fileteredBooks) && fileteredBooks &&  fileteredBooks.map((book) => (
               <ImagesContainer key={book._id} >
                 <StyledImage src={book.image} alt="bookimg" onClick={()=> handleBookDetails(book._id)}></StyledImage>
                   <h1 style={{fontSize:18,

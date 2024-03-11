@@ -5,15 +5,14 @@ import { BooksContainer, CostLikeContainer, ImagesContainer, LikeButton, StyledI
 import { FcLike } from "react-icons/fc";
 import { IoMdHeartEmpty } from "react-icons/io";
 import Cookies from 'universal-cookie';
-// import { useLocation } from 'react-router';
 import { HiEmojiSad } from "react-icons/hi";
 import { toast } from 'react-toastify';
+
 const Liked=()=>
 {
     const [liked,setLiked]=useState([]);
     const cookies=new Cookies();
     const token=cookies.get('jwtToken');
-    // const location=useLocation();
     useEffect(()=>{
         async function fetchData(){
             try{
@@ -78,7 +77,7 @@ const Liked=()=>
                     </ImagesContainer>
             ))} 
           </BooksContainer>
-                </LikedContainer>
+            </LikedContainer>
         </LikedMainContainer>
 
     )

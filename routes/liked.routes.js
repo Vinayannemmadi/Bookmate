@@ -9,14 +9,11 @@ const bodyParser=require('body-parser');
 router.use(bodyParser.json());
 
 router.get('/:id',async(req,res)=>{
-    console.log("get request: "+req.params.id);
     try{
         const liked=await Books.findOne({_id:req.params.id}); 
-        console.log(liked);
         res.send(liked);  
     }
     catch(error){
-        console.log("error in fecting data...", error);
         req.status(400).send('book not found');
     }
 });
@@ -35,30 +32,18 @@ function verifyToken(req, res, next) {
 }
 const authenticateToken=(req,res,next)=>{
     const {token}=req.body;
-    if(!token) return res.status(401).send("Authentication Required");
+    if(!token) return res.status(400).send("Authentication Required");
     
     jwt.verify(token,'your-secret', (err,decoded)=>{
-        if(err)return res.status(402).send({message:"Invalid Token"});
+        if(err)return res.status(400).send({message:"Invalid Token"});
         req.user=decoded;
         next();
     });
 };
-router.post('/',authenticateToken,async(req,res)=>{
-    const userId=req.user._id;
-    try{
-        const liked=await Liked.findOne({userId}); 
-        res.send(liked.booksArray);  
-    }
-    catch(error){
-        console.log("error in fecting data...", error);
-        req.status(400).send('book not found');
-    }
-});
+
 
 router.post('/',authenticateToken,async(req,res)=>{
-    console.log("request in liked/:id");
     const userId=req.user._id;
-    console.log('request with user id: '+userId);
     const user=await Liked.findOne({userId:userId});
     if(!user){
         res.status(400).send({message:'Login error'});
@@ -69,7 +54,6 @@ router.post('/',authenticateToken,async(req,res)=>{
 router.post('/:id', authenticateToken,async (req, res) => {
     const bookId=req.params.id;
     const userId=req.user._id;
-    console.log("request in liked/:id");
     try {
         const user = await Liked.findOne({ userId: userId });
         if(!user){
@@ -101,14 +85,12 @@ router.post('/:id', authenticateToken,async (req, res) => {
         }
     } 
     catch (error) {
-        console.error('error');
         return res.status(500).send({message:'this book cannot be added to liked'});
     }
 });
 
 router.put('/:id',async(req,res)=>{
     const liked=await Books.findById(req.params.id);
-    console.log(req.params.id);
     if(!liked){
         res.status(400).send("book not found");
     }

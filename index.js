@@ -33,6 +33,10 @@ const trendingRouter=require('./routes/trending.routes');
 const mostreadRouter=require('./routes/mostread.routes');
 
 //Routes..
+app.use(express.static(path.join(__dirname,'/client/build')));
+app.get('*',(req,res)=>{
+  res.sendFile(path.join(__dirname,'client','build','index.html'));
+});
 
 app.use('/api/mostread',mostreadRouter);
 app.use('/api/trending',trendingRouter);
@@ -44,9 +48,5 @@ app.use('/api/liked',likedRouter);
 app.use('/test',testRouter);
 app.use('/files', express.static('files'));
 
-app.use(express.static(path.join(__dirname,'/client/build')));
-app.get('*',(req,res)=>{
-  res.sendFile(path.join(__dirname,'client','build','index.html'));
-});
 
 app.listen(5000, () => console.log('Listening on port 5000...'));

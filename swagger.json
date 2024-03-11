@@ -1,0 +1,55 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Bookmate API",
+    "description": "API for managing books and user interactions."
+  },
+  "servers": [
+    {
+      "url": "http://localhost:5000"
+    }
+  ],
+  "paths": {
+    "/api/books": {
+      "get": {
+        "summary": "Get all books",
+        "responses": {
+          "200": {
+            "description": "List of books retrieved successfully"
+          }
+        }
+      }
+    },
+    "/api/auth": {
+      "post": {
+        "summary": "Authenticate user",
+        "responses": {
+          "200": {
+            "description": "User authenticated successfully"
+          }
+        }
+      }
+    },
+    "/api/liked": {
+      "get": {
+        "summary": "Get liked items",
+        "responses": {
+          "200": {
+            "description": "List of liked items retrieved successfully"
+          }
+        }
+      }
+    },
+    "/test": {
+      "get": {
+        "summary": "Test route",
+        "responses": {
+          "200": {
+            "description": "Test route successful"
+          }
+        }
+      }
+    }
+  }
+}

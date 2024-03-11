@@ -44,7 +44,7 @@ app.use('/api/liked',likedRouter);
 app.use('/test',testRouter);
 app.use('/files', express.static('files'));
 
-app.use(express.static(path.join(__dirname,'/client/dist')));
+app.use(express.static(path.join(__dirname,'/client/build')));
 app.get('*',(req,res)=>{
   res.sendFile(path.join(__dirname,'client','build','index.html'));
 });

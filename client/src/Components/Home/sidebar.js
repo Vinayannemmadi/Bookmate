@@ -8,6 +8,7 @@ import { FaHeart } from "react-icons/fa";
 import Cookies from 'universal-cookie';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router';
+
 const SideBarContainer=()=> {
   const cookies=new Cookies();
   const token=cookies.get('jwtToken');

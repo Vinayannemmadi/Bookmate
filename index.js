@@ -15,7 +15,7 @@ app.use(cors({ origin:"https://book-mate.onrender.com"}));
 // https://book-mate.onrender.com/
 
 app.use('/api/liked/:id', (req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:5000');
+  res.setHeader('Access-Control-Allow-Origin', "https://book-mate.onrender.com");
   res.setHeader('Access-Control-Allow-Methods', 'PUT, GET, POST, DELETE');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
   next();

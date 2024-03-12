@@ -25,7 +25,7 @@ const findBook=async(req,res,next)=>{
     }
     catch(error){
         console.log("error in fecting data...", error);
-        res.status(500).send("error in fecting data...");
+        res.status(400).send("error in fecting data...");
     }
 
 }

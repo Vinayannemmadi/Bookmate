@@ -10,6 +10,7 @@ dotenv.config();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+
 app.use(cors({ origin:"https://book-mate.onrender.com"}));
 
 // https://book-mate.onrender.com/
@@ -24,6 +25,7 @@ app.use('/api/liked/:id', (req, res, next) => {
 mongoose.connect(process.env.mongodb_url)
     .then(()=>console.log( "Connected to MongoDB.."))
     .catch((err)=> console.error("Error connecting to MongoDB", err)); 
+
 //Imports..
 const booksRouter = require('./routes/books.routes');
 const authRouter=require('./routes/auth.routes');
@@ -44,7 +46,7 @@ app.use('/api/mostread',mostreadRouter);
 app.use('/api/trending',trendingRouter);
 app.use('/api/file',fileRouter);
 app.use("/api/newbooks",newbooksRouter);
-app.use("/api/books",booksRouter);
+app.use('/api/books',booksRouter);
 app.use('/api/auth',authRouter);
 app.use('/api/liked',likedRouter);
 app.use('/test',testRouter);

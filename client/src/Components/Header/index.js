@@ -113,10 +113,10 @@ const Navbar = () => {
                 {logName==='Login'? <IoMdLogIn/>:<IoMdLogOut/>} {logName}</SideMenuItem>
           </SideMenuItemContainer>
           <SideMenuItemContainer>
-              <SideMenuItem onClick={() => navigate('/about')}><FaExclamation/> About</SideMenuItem>
+              <SideMenuItem onClick={() => routing('about')}><FaExclamation/> About</SideMenuItem>
           </SideMenuItemContainer>
           <SideMenuItemContainer>
-              <SideMenuItem onClick={() => navigate('/contact')}><MdOutlineContactSupport/><span> </span> Contact</SideMenuItem>
+              <SideMenuItem onClick={() => routing('contact')}><MdOutlineContactSupport/><span> </span> Contact</SideMenuItem>
           </SideMenuItemContainer>
         </SideMenuItems>
       </SideMenu>

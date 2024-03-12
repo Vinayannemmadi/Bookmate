@@ -11,17 +11,18 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use(cors({ origin:"https://book-mate.onrender.com"}));
+
 // https://book-mate.onrender.com/
 
 app.use('/api/liked/:id', (req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', 'https://book-mate.onrender.com');
+  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:5000');
   res.setHeader('Access-Control-Allow-Methods', 'PUT, GET, POST, DELETE');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
   next();
 });
 
 mongoose.connect(process.env.mongodb_url)
-    .then(()=>console.log( "Connected to MongoDB"))
+    .then(()=>console.log( "Connected to MongoDB.."))
     .catch((err)=> console.error("Error connecting to MongoDB", err)); 
 //Imports..
 const booksRouter = require('./routes/books.routes');
